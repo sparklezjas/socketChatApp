@@ -11,12 +11,15 @@ const Chat = (props) => {
     navigate('/homepage')
   }
   return (
-    <div>
-      <h2>Sign in with a username to join our server</h2>
-      <form onSubmit={joinServer}>
-        <label>Username</label>
-        <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-        <button>Join</button>
+    <div style={{width: "475px", margin: "20px", padding: "20px", textAlign: "center", border: "2px solid black"}}>
+      <h2>Get started right now!</h2>
+      <br/>
+      <p>I want to start chatting with the name...</p>
+      <br/>
+      <form onSubmit={joinServer} >
+        <input style={{width: "200px", margin: "10px", padding: 
+      "5px", border: "2px solid black"}} type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+        <button style={{padding: "5px", backgroundColor: "#aae8d8"}}>Start Chatting</button>
       </form>
 
     </div>

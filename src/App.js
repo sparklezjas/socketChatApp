@@ -4,6 +4,7 @@ import './App.css';
 import Chat from './components/Chat';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepage from './components/Homepage';
+import Nav from './components/Nav'
  
 function App() {
   const [socket] = useState(() => io(':8000'))
@@ -22,6 +23,7 @@ function App() {
  
   return (
     <div className="App">
+      <Nav/>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Chat socket={socket} username={username} setUsername={setUsername}/>}/>
