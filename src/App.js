@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import './App.css';
-
+import Chat from './components/Chat';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Homepage from './components/Homepage';
+ 
 function App() {
+  const [socket] = useState(() => io(':8000'))
+  const[username, setUsername] = useState('')
+  const [isConnected, setIsConnected] = useState(socket.connected)
+ 
+  useEffect(() => {
+
+    socket.on('connect', () => {
+      setIsConnected(true)
+    });
+
+    return () => {
+    socket.disconnect(true)}
+  }, []);
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Chat socket={socket} username={username} setUsername={setUsername}/>}/>
+          <Route path='/homepage' element={<Homepage socket={socket} username={username} setUsername={setUsername}/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
-
+ 
 export default App;
+
